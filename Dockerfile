@@ -11,7 +11,7 @@ RUN apt-get install -y imagemagick
 
 RUN apt-get install -y libmemcached-dev && pecl install memcached
 RUN docker-php-ext-install bcmath
-RUN pecl install apcu-beta
+RUN pecl install apcu-4.0.8
 
 COPY server-config/site.conf /etc/apache2/sites-enabled/app.conf
 COPY server-config/apache2.conf /etc/apache2/apache2.conf
