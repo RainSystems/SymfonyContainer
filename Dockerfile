@@ -15,6 +15,8 @@ RUN pecl install apcu-4.0.8
 
 RUN apt-get install -y npm && ln -s /usr/bin/nodejs /usr/bin/node && npm install -g react-tools
 
+RUN curl -sS https://getcomposer.org/installer | php
+RUN mv composer.phar /usr/local/bin/composer
 
 COPY server-config/site.conf /etc/apache2/sites-enabled/app.conf
 COPY server-config/apache2.conf /etc/apache2/apache2.conf
