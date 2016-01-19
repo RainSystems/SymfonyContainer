@@ -1,19 +1,26 @@
 FROM php:5.6-apache
 
-RUN a2enmod rewrite && \
-    apt-get update -y && apt-get install -y libpq-dev && \
-    docker-php-ext-configure pdo_pgsql && \
-    docker-php-ext-install pdo pdo_pgsql mbstring
+RUN a2enmod rewrite
+RUN apt-get update -y && apt-get install -y \
+    libpq-dev \
+    libfreetype6-dev \
+    libjpeg62-turbo-dev \
+    libmcrypt-dev \
+    libpng12-dev \
+    ruby \
+    imagemagick \
+    libmemcached-dev \
+    npm \
+    git
+    
+RUN docker-php-ext-configure pdo_pgsql && \
+    docker-php-ext-install pdo pdo_pgsql mbstring bcmath zip gd exif
 
-RUN apt-get install -y ruby && gem install -n /usr/bin sass
+RUN gem install -n /usr/bin sass
 
-RUN apt-get install -y imagemagick
-
-RUN apt-get install -y libmemcached-dev && pecl install memcached
-RUN docker-php-ext-install bcmath
+RUN pecl install memcached
 RUN pecl install apcu-4.0.8
-
-RUN apt-get install -y npm && ln -s /usr/bin/nodejs /usr/bin/node && npm install -g react-tools
+RUN ln -s /usr/bin/nodejs /usr/bin/node && npm install -g react-tools
 
 RUN curl -sS https://getcomposer.org/installer | php
 RUN mv composer.phar /usr/local/bin/composer
