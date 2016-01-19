@@ -19,7 +19,6 @@ RUN apt-get install -y npm && ln -s /usr/bin/nodejs /usr/bin/node && npm install
 COPY server-config/site.conf /etc/apache2/sites-enabled/app.conf
 COPY server-config/apache2.conf /etc/apache2/apache2.conf
 COPY server-config/php.ini /usr/local/etc/php/php.ini
-COPY server-config/.bashrc /root/.bashrc
 
 RUN rm -rf /var/www/* && mkdir /var/www/web
 
